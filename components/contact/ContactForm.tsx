@@ -24,27 +24,43 @@ const budgetRanges = [
 const inputClasses =
   "w-full rounded-xl border border-line bg-surface/60 px-4 py-3 text-sm text-ink placeholder:text-faint transition-colors duration-300 focus:border-accent/60 focus:outline-none focus:ring-1 focus:ring-accent/40";
 
-/**
- * Contact form UI. No backend is wired up yet — see the TODO in
- * handleSubmit for where to connect an API route or form service.
- */
 export default function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle"
+  );
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setStatus("sending");
+    setErrorMessage("");
 
-    // TODO: connect to a real endpoint when the backend is ready, e.g.:
-    //   const formData = new FormData(e.currentTarget);
-    //   await fetch("/api/contact", {
-    //     method: "POST",
-    //     body: JSON.stringify(Object.fromEntries(formData)),
-    //     headers: { "Content-Type": "application/json" },
-    //   });
-    // Recommended: a Next.js route handler at app/api/contact/route.ts that
-    // validates input and relays via an email provider (Resend, SES, etc.).
+    const form = e.currentTarget;
+    const formData = new FormData(form);
 
-    setStatus("sent");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      });
+
+      const data = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(data.error ?? "Something went wrong. Please try again.");
+      }
+
+      setStatus("sent");
+      form.reset();
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
+      );
+    }
   };
 
   if (status === "sent") {
@@ -91,6 +107,7 @@ export default function ContactForm() {
             autoComplete="name"
             placeholder="Your name"
             className={inputClasses}
+            disabled={status === "sending"}
           />
         </div>
         <div>
@@ -105,6 +122,7 @@ export default function ContactForm() {
             autoComplete="email"
             placeholder="you@company.com"
             className={inputClasses}
+            disabled={status === "sending"}
           />
         </div>
         <div>
@@ -120,6 +138,7 @@ export default function ContactForm() {
             required
             defaultValue=""
             className={`${inputClasses} appearance-none`}
+            disabled={status === "sending"}
           >
             <option value="" disabled>
               Select a project type
@@ -144,6 +163,7 @@ export default function ContactForm() {
             required
             defaultValue=""
             className={`${inputClasses} appearance-none`}
+            disabled={status === "sending"}
           >
             <option value="" disabled>
               Select a budget range
@@ -169,15 +189,23 @@ export default function ContactForm() {
             rows={5}
             placeholder="Tell me about the system you want to build…"
             className={`${inputClasses} resize-y`}
+            disabled={status === "sending"}
           />
         </div>
       </div>
 
+      {status === "error" && (
+        <p className="mt-5 text-sm text-red-400" role="alert">
+          {errorMessage}
+        </p>
+      )}
+
       <button
         type="submit"
-        className="mt-7 w-full rounded-full bg-gradient-to-r from-accent-deep to-glow px-8 py-3.5 text-sm font-semibold text-void transition-transform duration-300 hover:scale-[1.02] sm:w-auto"
+        disabled={status === "sending"}
+        className="mt-7 w-full rounded-full bg-gradient-to-r from-accent-deep to-glow px-8 py-3.5 text-sm font-semibold text-void transition-transform duration-300 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
       >
-        Send Message
+        {status === "sending" ? "Sending…" : "Send Message"}
       </button>
     </form>
   );
