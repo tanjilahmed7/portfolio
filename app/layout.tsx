@@ -49,6 +49,9 @@ export const metadata: Metadata = {
     description: site.description,
   },
   robots: { index: true, follow: true },
+  verification: {
+    google: "Qa5BPxUlgKx9qx_02dnTIFYLaNUXan2DqKJP4-lFaAg",
+  },
   icons: {
     icon: "/logo.png",
     apple: "/logo.png",
