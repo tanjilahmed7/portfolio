@@ -56,7 +56,7 @@ export default function Expertise() {
         <SectionHeading
           eyebrow="Expertise"
           title="Full-stack depth, from database schema to deploy pipeline."
-          description="Nine years across the stack means I don't hand problems between silos — I design the whole system and know where it will bend before it breaks."
+          description="Ten years across the stack means I don't hand problems between silos — I design the whole system and know where it will bend before it breaks."
         />
 
         <div data-skill-grid className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">

@@ -6,7 +6,7 @@ import { projects } from "@/data/projects";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Case studies from 9+ years of engineering: enterprise CMS platforms, multilingual e-commerce, AI-powered products, and operational systems.",
+    "Case studies from 10+ years of engineering: enterprise CMS platforms, multilingual e-commerce, AI-powered products, and operational systems.",
 };
 
 export default function ProjectsPage() {

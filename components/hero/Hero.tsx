@@ -97,14 +97,6 @@ export default function Hero() {
             <span className="relative z-10">View Projects</span>
             <span className="absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </Link>
-          {/* TODO: drop the final resume PDF into /public as Tanjil-Ahmed-Resume.pdf */}
-          <a
-            href={site.resumeUrl}
-            download
-            className="rounded-full border border-line px-8 py-3.5 text-sm font-medium text-ink transition-all duration-300 hover:border-accent/50 hover:text-accent"
-          >
-            Download Resume
-          </a>
         </div>
 
         <ul

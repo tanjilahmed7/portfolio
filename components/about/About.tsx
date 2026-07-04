@@ -5,7 +5,7 @@ import { useGSAP, revealFrom, prefersReducedMotion } from "@/lib/gsap";
 import Reveal from "@/components/ui/Reveal";
 
 const stats = [
-  { value: "9+", label: "Years of engineering" },
+  { value: "10+", label: "Years of engineering" },
   { value: "15+", label: "Complex applications delivered" },
   { value: "3", label: "Marketplace-grade product channels" },
   { value: "1", label: "Employee of the Year award" },
@@ -57,7 +57,7 @@ export default function About() {
             </h2>
             <div className="mt-7 space-y-5 text-base leading-relaxed text-muted md:text-lg">
               <p>
-                For over nine years I&apos;ve been the engineer businesses call
+                For over ten years I&apos;ve been the engineer businesses call
                 when a web application has to do more than exist — when it has
                 to handle real traffic, real money, and real growth. My work
                 spans e-commerce platforms, SaaS products, CMS systems, AI
