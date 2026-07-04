@@ -72,23 +72,19 @@ export default function ExperienceTimeline() {
                     : "md:ml-auto md:pl-14"
                 }`}
               >
-                {/* Node dot */}
+                {/* Node dot — sits on the center line by pinning to the
+                    column edge that meets it, then nudging back by half its
+                    own width. On mobile the line runs down the left gutter. */}
                 <span
-                  className={`absolute top-1.5 left-0 grid h-[15px] w-[15px] place-items-center md:left-auto ${
-                    i % 2 === 0
-                      ? "md:-right-[7.5px]"
-                      : "md:-left-[7.5px]"
+                  className={`absolute top-1.5 left-0 h-[15px] w-[15px] rounded-full border-2 md:-translate-x-1/2 ${
+                    i % 2 === 0 ? "md:left-full" : "md:left-0"
+                  } ${
+                    exp.current
+                      ? "border-accent bg-accent/30 shadow-[0_0_16px_rgba(103,232,249,0.6)]"
+                      : "border-faint bg-void"
                   }`}
                   aria-hidden
-                >
-                  <span
-                    className={`h-full w-full rounded-full border-2 ${
-                      exp.current
-                        ? "border-accent bg-accent/30 shadow-[0_0_16px_rgba(103,232,249,0.6)]"
-                        : "border-faint bg-void"
-                    }`}
-                  />
-                </span>
+                />
 
                 <p className="font-mono text-xs tracking-wider text-accent">
                   {exp.period}
@@ -111,14 +107,10 @@ export default function ExperienceTimeline() {
                   {exp.responsibilities.map((r) => (
                     <li
                       key={r}
-                      className={`flex items-start gap-2.5 ${
-                        i % 2 === 0 ? "md:flex-row-reverse md:text-right" : ""
+                      className={`text-sm ${
+                        i % 2 === 0 ? "md:text-right" : ""
                       }`}
                     >
-                      <span
-                        className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent/70"
-                        aria-hidden
-                      />
                       {r}
                     </li>
                   ))}
