@@ -8,6 +8,7 @@ export const site = {
   // TODO: replace with final profile URLs when available
   linkedin: "https://www.linkedin.com/in/tanjilahmed",
   github: "https://github.com/tanjilahmed",
+  resumeUrl: "/Tanjil Ahmed - Resume.pdf",
   headline:
     "Building scalable web systems, AI products, and digital platforms that move businesses forward.",
   subheadline:

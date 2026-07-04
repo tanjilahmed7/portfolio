@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Logo from "@/components/ui/Logo";
 import { navLinks, site } from "@/data/site";
 
 export default function Navbar() {
@@ -46,20 +47,7 @@ export default function Navbar() {
         className="container-x flex h-16 items-center justify-between md:h-[4.5rem]"
         aria-label="Main navigation"
       >
-        <Link
-          href="/"
-          className="group flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight"
-        >
-          <span
-            aria-hidden
-            className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-accent/80 to-glow/80 font-mono text-sm font-bold text-void transition-transform duration-300 group-hover:rotate-6"
-          >
-            TA
-          </span>
-          <span>
-            tanjil<span className="text-accent">.</span>ahmed
-          </span>
-        </Link>
+        <Logo />
 
         <ul className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (

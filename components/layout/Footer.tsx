@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Logo from "@/components/ui/Logo";
 import { navLinks, site } from "@/data/site";
 
 export default function Footer() {
@@ -8,6 +9,7 @@ export default function Footer() {
       <div className="container-x relative py-14">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-sm">
+            <Logo showWordmark={false} size={40} className="mb-4" href="" />
             <p className="font-display text-xl font-semibold tracking-tight">
               tanjil<span className="text-accent">.</span>ahmed
             </p>
