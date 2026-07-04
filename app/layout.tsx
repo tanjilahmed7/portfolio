@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -65,6 +66,18 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} dark antialiased`}
     >
       <body className="font-sans">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-Z7CQPL5ZD3"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-Z7CQPL5ZD3');
+          `}
+        </Script>
         <SmoothScroll>
           <Navbar />
           <main id="main">{children}</main>
