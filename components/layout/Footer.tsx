@@ -76,9 +76,7 @@ export default function Footer() {
           <p>
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
-          <p className="font-mono">
-            Built with Next.js · GSAP · Three.js — {site.location}
-          </p>
+          <p className="font-mono">{site.email}</p>
         </div>
       </div>
     </footer>
