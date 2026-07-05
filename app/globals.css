@@ -19,6 +19,13 @@
 
 html {
   scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
+  /* On iOS Safari the <html> element is the scroll container, so clipping
+     here (in addition to body) is what actually stops the sideways
+     rubber-band from decorative glow-orbs that bleed past the viewport.
+     `clip` (not `hidden`) avoids creating a scroll container, so it leaves
+     position: sticky and Lenis smooth scrolling untouched. */
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 /* Keep hash-navigation targets clear of the fixed navbar */

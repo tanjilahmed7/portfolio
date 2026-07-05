@@ -38,63 +38,68 @@ export default function Navbar() {
         : pathname.startsWith(href);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled || open ? "glass-strong" : "border-b border-transparent"
-      }`}
-    >
-      <nav
-        className="container-x flex h-16 items-center justify-between md:h-[4.5rem]"
-        aria-label="Main navigation"
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+          scrolled || open ? "glass-strong" : "border-b border-transparent"
+        }`}
       >
-        <Logo />
+        <nav
+          className="container-x flex h-16 items-center justify-between md:h-[4.5rem]"
+          aria-label="Main navigation"
+        >
+          <Logo />
 
-        <ul className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <li key={link.href}>
+          <ul className="hidden items-center gap-8 md:flex">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`text-sm transition-colors duration-300 hover:text-accent ${
+                    isActive(link.href) ? "text-accent" : "text-muted"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+            <li>
               <Link
-                href={link.href}
-                className={`text-sm transition-colors duration-300 hover:text-accent ${
-                  isActive(link.href) ? "text-accent" : "text-muted"
-                }`}
+                href="/contact"
+                className="rounded-full border border-accent/30 bg-accent/10 px-5 py-2 text-sm font-medium text-accent transition-all duration-300 hover:border-accent/60 hover:bg-accent/20"
               >
-                {link.label}
+                Let&apos;s Talk
               </Link>
             </li>
-          ))}
-          <li>
-            <Link
-              href="/contact"
-              className="rounded-full border border-accent/30 bg-accent/10 px-5 py-2 text-sm font-medium text-accent transition-all duration-300 hover:border-accent/60 hover:bg-accent/20"
-            >
-              Let&apos;s Talk
-            </Link>
-          </li>
-        </ul>
+          </ul>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
-        >
-          <span
-            className={`h-px w-6 bg-ink transition-transform duration-300 ${
-              open ? "translate-y-[3.5px] rotate-45" : ""
-            }`}
-          />
-          <span
-            className={`h-px w-6 bg-ink transition-transform duration-300 ${
-              open ? "-translate-y-[3.5px] -rotate-45" : ""
-            }`}
-          />
-        </button>
-      </nav>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+          >
+            <span
+              className={`h-px w-6 bg-ink transition-transform duration-300 ${
+                open ? "translate-y-[3.5px] rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`h-px w-6 bg-ink transition-transform duration-300 ${
+                open ? "-translate-y-[3.5px] -rotate-45" : ""
+              }`}
+            />
+          </button>
+        </nav>
+      </header>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — kept as a sibling of <header> (not a child) so its
+          fixed positioning stays relative to the viewport. The header's
+          backdrop-filter would otherwise become its containing block and
+          collapse this overlay to the bar's height. */}
       <div
-        className={`fixed inset-0 top-16 z-40 bg-void/95 backdrop-blur-xl transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 top-16 z-40 bg-void/98 backdrop-blur-xl transition-opacity duration-300 md:hidden ${
           open ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
@@ -121,6 +126,6 @@ export default function Navbar() {
           {site.email}
         </p>
       </div>
-    </header>
+    </>
   );
 }
